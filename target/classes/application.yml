@@ -1,0 +1,19 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/youchuangdb?useUnicode=true&useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 888888
+
+    thymeleaf:
+      cache: false
+
+mybatis-plus:
+  global-config:
+    db-config:
+      id-type: auto
+      mapper-locations: classpath:mapper/project/*Mapper.xml
+      type-aliases-package: com.youchuang.project.entity
+  loggin:
+    level:
+      com.youchuang.project.dao: trace

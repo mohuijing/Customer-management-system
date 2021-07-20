@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="zh" xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>客户管理系统</title>
+    <link rel="stylesheet" th:href="@{/webjars/layui/css/layui.css}" media="all">
+</head>
+<body class="layui-layout-body">
+<div class="layui-layout layui-layout-admin">
+    <div class="layui-header">
+        <div class="layui-logo">客户管理系统</div>
+        <ul class="layui-nav layui-layout-right">
+            <li style="float: left;line-height: 60px;position: relative; ">
+                <span th:text="${session.account.realName}"></span>
+            </li>
+            <li class="layui-nav-item"><a th:href="@{/auth/logout}">退出登录</a></li>
+        </ul>
+    </div>
+
+    <div class="layui-side layui-bg-black">
+        <div class="layui-side-scroll">
+            <!-- 左侧导航区域（可配合layui已有的垂直导航） -->
+            <ul class="layui-nav layui-nav-tree" lay-filter="test">
+                <li class="layui-nav-item layui-nav-itemed" th:each="resource:${resources}">
+                    <a class="" href="javascript:;" th:text="${resource.resourceName}"></a>
+                    <dl class="layui-nav-child" th:if="${resource.subs} ne null" th:each="sub:${resource.subs}">
+                        <dd>
+                            <a th:href="'javascript:showTab(\''+${sub.url}+'\',\'' +${sub.resourceName}+'\',' + ${sub.resourceId} +');'"
+                               th:text="${sub.resourceName}"></a></dd>
+                    </dl>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="layui-body">
+        <!-- 内容主体区域 -->
+        <div class="layui-tab" lay-filter="menu" lay-allowClose="true">
+            <ul class="layui-tab-title">
+                <li class="layui-this">欢迎页</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <div class="layui-carousel" id="test1">
+                        <div carousel-item>
+                            <div><a href="https://www.longshine.com/about"
+                                    target="_blank">
+                                <img style="height: 435px;width: 100%;" src='../../../image/img1.jpg'></a></div>
+                            <div><a href="https://www.hanclouds.com" target="_blank">
+                                <img style="height: 435px;width: 100%;" src='../../../image/img2.jpg'></a></div>
+                            <div><a href="https://www.aliyun.com/solution/energy?spm=5176.7960203.238067.15.pu7iXz"
+                                    target="_blank">
+                                <img style="height: 435px;width: 100%;" src='../../../image/img3.jpg'></a></div>
+                            <div><a href="https://longshine.zhiye.com/Campus" target="_blank">
+                                <img style="height: 435px;width: 100%;" src='../../../image/img4.jpg'></a></div>
+                            <div><a href="http://www.ysten.com/" target="_blank">
+                                <img style="height: 435px;width: 100%;" src='../../../image/img5.jpg'></a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-footer">
+            <!-- 底部固定区域 -->
+            © 2021 xxx科技股份有限公司 版权所有.
+        </div>
+    </div>
+    <script th:src="@{/webjars/layui/layui.all.js}"></script>
+    <script th:src="@{/webjars/jquery/jquery.js}"></script>
+    <script th:src="@{/js/common.js}"></script>
+    <script th:src="@{/js/login/main.js}"></script>
+    <script th:src="@{/js/login/img.js}"></script>
+
+
+</body>
+</html>
